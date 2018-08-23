@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\model\Product;
 use App\model\Review;
 use Illuminate\Http\Request;
+use App\Http\Resources\ReviewResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class ReviewController extends Controller
 {
@@ -12,9 +15,10 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($products)
     {
-        //
+        return ReviewResource::collection(Product::find($products)->reviews);
+        // return Review::all();
     }
 
     /**
